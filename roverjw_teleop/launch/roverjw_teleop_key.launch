@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!-- roverjw_teleop_key already has its own built in velocity smoother -->
+  <node pkg="roverjw_teleop" type="roverjw_teleop_key" name="roverjw_teleop_keyboard"  output="screen">
+  </node>
+</launch>
