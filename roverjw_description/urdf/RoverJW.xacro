@@ -4,8 +4,9 @@
 	
   <!-- Importing external urdf/xacros. -->
 	<xacro:include filename="$(find roverjw_description)/urdf/materials.xacro" />
-  	<xacro:include filename="$(find roverjw_description)/urdf/RoverJW.gazebo" />
+  <xacro:include filename="$(find roverjw_description)/urdf/RoverJW.gazebo" />
 	<xacro:include filename="$(find roverjw_description)/urdf/macros.xacro" />
+  <xacro:property name="cameraMass" value="0.1"/>
 
   <!-- Defining macros. -->
 	<xacro:macro name="wheel" params="prefix reflect_x:=1 reflect_y:=1 mimic:=false">
@@ -96,8 +97,8 @@
 
   <!-- Defining model links. -->
 	<link name="odom" />
-  <link
-    name="base_link">
+
+  <link name="base_link">
     <inertial>
       <origin
         xyz="-0.00019948 0 0.05685679"
@@ -120,15 +121,15 @@
     </visual>
     <collision>
       <origin
-        xyz="0 0 0.15"
+        xyz="0 0 0.05"
         rpy="0 0 0" />
       <geometry>
-        <box size="0.455 0.426 0.32" />
+        <box size="0.455 0.426 0.16" />
       </geometry>
     </collision>
   </link>
-  <link
-    name="top_link">
+  
+  <link name="top_link">
     <inertial>
       <origin
         xyz="-1.356e-05 0 -0.00296339"
@@ -150,8 +151,8 @@
       <material name="white" />
     </visual>
   </link>
-  <link
-    name="battery_link">
+
+  <link name="battery_link">
     <inertial>
       <origin
         xyz="0.00355981 0 0.0084182"
@@ -173,8 +174,8 @@
       <material name="black" />
     </visual>
   </link>
-  <link
-    name="housing_link">
+
+  <link name="housing_link">
     <inertial>
       <origin
         xyz="-0.0103579 0 0.01892497"
@@ -198,33 +199,28 @@
   </link>
 
   <!-- Defining model joints. -->
-  <joint
-    name="fixed_base_joint"
-    type="fixed">
+  <joint name="fixed_base_joint" type="fixed">
     <parent link="odom" />
     <child link="base_link" />
   </joint>
-  <joint
-    name="fixed_top_joint"
-    type="fixed">
+
+  <joint name="fixed_top_joint" type="fixed">
     <origin
       xyz="0 0 0.114485752303901"
       rpy="0 0 0" />
     <parent link="base_link" />
     <child link="top_link" />
   </joint>
-  <joint
-    name="fixed_battery_joint"
-    type="fixed">
+
+  <joint name="fixed_battery_joint" type="fixed">
     <origin
       xyz="-0.0930197544779129 -0.00012769656788774 0"
       rpy="0 0 0" />
     <parent link="top_link" />
     <child link="battery_link" />
   </joint>
-  <joint
-    name="fixed_housing_joint"
-    type="fixed">
+
+  <joint name="fixed_housing_joint" type="fixed">
     <origin
       xyz="0.03472949777154 0 0"
       rpy="0 0 0" />
@@ -232,7 +228,11 @@
     <child link="housing_link" />
   </joint>
 
+
+
+
   <xacro:arg name="use_nominal_extrinsics" default="false" />
+
 
 
   <!-- Building links/joints from macros. -->
@@ -242,5 +242,71 @@
 	<xacro:wheel prefix="rf" />
 	<xacro:wheel prefix="lb" />
 	<xacro:wheel prefix="rb" />
+
+
+
+<!-- Sensor -->
+
+  <joint name="scan_joint" type="fixed">
+    <parent link="housing_link"/>
+    <child link="scan_link"/>
+    <origin xyz="0 0 0.032" rpy="0 0 0"/>
+  </joint>
+  <link name="scan_link">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://roverjw_description/meshes/sensors/lds.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0.015 0 -0.0065" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0315" radius="0.055"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.114" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001" />
+    </inertial>
+  </link>
+
+  <link name="camera">
+    <collision>
+      <origin xyz="-0.0625 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.025 0.05 0.025"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="-0.0625 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.025 0.05 0.025"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
+    <inertial>
+      <mass value="${cameraMass}" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <box_inertia m="${cameraMass}" x="0.025" y="0.05" z="0.05" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz=".2 0 0" rpy="0 0 0"/>
+    <parent link="housing_link"/>
+    <child link="camera"/>
+  </joint>
+
 
 </robot>
