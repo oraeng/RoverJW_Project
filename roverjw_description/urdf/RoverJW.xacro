@@ -309,4 +309,26 @@
   </joint>
 
 
+    <link name='imu_link'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+
+    <inertial>
+      <mass value="0.015" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-05" ixy="0.0" ixz="0.0"
+               iyy="1e-05" iyz="0.0"
+               izz="1e-05" />
+    </inertial>
+    </link>
+
+
+    <joint name="imu_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="imu_link"/>
+        <axis xyz="1 0 0" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="housing_link"/>
+        <child link="camera"/>
+    </joint>
+
 </robot>
