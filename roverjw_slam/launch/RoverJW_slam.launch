@@ -19,6 +19,7 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
     <!-- <param name="publish_frequency" type="double" value="50.0" /> -->
   </node>
+  <node pkg="tf" type="static_transform_publisher" name="base" args="0 0 0 0 0 0 /map /odom 100" />
 
 
 

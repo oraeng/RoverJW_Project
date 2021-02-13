@@ -251,7 +251,7 @@ Visualization Manager:
           Radius: 0.0299999993
           Shaft Diameter: 0.100000001
           Shaft Length: 0.100000001
-          Topic: /move_base/DWAPlannerROS/global_plan
+          Topic: move_base/DWAPlannerROS/global_plan
           Unreliable: false
           Value: true
       Enabled: true
@@ -263,7 +263,7 @@ Visualization Manager:
           Color: 0; 0; 0
           Enabled: true
           Name: Polygon
-          Topic: /move_base/local_costmap/footprint
+          Topic: move_base/local_costmap/footprint
           Unreliable: false
           Value: true
         - Alpha: 0.699999988
@@ -272,7 +272,7 @@ Visualization Manager:
           Draw Behind: false
           Enabled: true
           Name: Costmap
-          Topic: /move_base/local_costmap/costmap
+          Topic: move_base/local_costmap/costmap
           Unreliable: false
           Use Timestamp: false
           Value: true
@@ -296,7 +296,7 @@ Visualization Manager:
           Radius: 0.0299999993
           Shaft Diameter: 0.100000001
           Shaft Length: 0.100000001
-          Topic: /move_base/DWAPlannerROS/local_plan
+          Topic: move_base/DWAPlannerROS/local_plan
           Unreliable: false
           Value: true
       Enabled: true
@@ -313,7 +313,7 @@ Visualization Manager:
       Shaft Length: 0.5
       Shaft Radius: 0.0500000007
       Shape: Arrow
-      Topic: /move_base_simple/goal
+      Topic: move_base_simple/goal
       Unreliable: false
       Value: true
     - Class: rviz/Group
@@ -343,7 +343,7 @@ Visualization Manager:
           Size (Pixels): 3
           Size (m): 0.0300000007
           Style: Flat Squares
-          Topic: /scan_matched_points2
+          Topic: scan_matched_points2
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -357,13 +357,13 @@ Visualization Manager:
           Submap query service: /submap_query
           Submaps:
             All: true
-          Topic: /submap_list
+          Topic: submap_list
           Tracking frame: base_link
           Unreliable: false
           Value: false
         - Class: rviz/MarkerArray
           Enabled: false
-          Marker Topic: /trajectory_node_list
+          Marker Topic: trajectory_node_list
           Name: Trajectories
           Namespaces:
             {}
@@ -371,7 +371,7 @@ Visualization Manager:
           Value: false
         - Class: rviz/MarkerArray
           Enabled: false
-          Marker Topic: /constraint_list
+          Marker Topic: constraint_list
           Name: Constraints
           Namespaces:
             {}
@@ -379,7 +379,7 @@ Visualization Manager:
           Value: false
         - Class: rviz/MarkerArray
           Enabled: false
-          Marker Topic: /landmark_poses_list
+          Marker Topic: landmark_poses_list
           Name: Landmark Poses
           Namespaces:
             {}
@@ -400,9 +400,9 @@ Visualization Manager:
       Hide Inactive Objects: true
     - Class: rviz/Select
     - Class: rviz/SetInitialPose
-      Topic: /initialpose
+      Topic: initialpose
     - Class: rviz/SetGoal
-      Topic: /move_base_simple/goal
+      Topic: move_base_simple/goal
     - Class: rviz/Measure
   Value: true
   Views:
