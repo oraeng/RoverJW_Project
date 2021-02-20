@@ -36,10 +36,10 @@ else:
   import tty, termios
 
 ROVERJW_MAX_LIN_VEL = 1
-ROVERJW_MAX_ANG_VEL = 2.84
+ROVERJW_MAX_ANG_VEL = 3.00
 
-LIN_VEL_STEP_SIZE = 0.01
-ANG_VEL_STEP_SIZE = 0.1
+LIN_VEL_STEP_SIZE = 0.2
+ANG_VEL_STEP_SIZE = 0.2
 
 msg = """
 Control Your RoverJW!
@@ -47,10 +47,11 @@ Control Your RoverJW!
 Moving around:
         w
    a    s    d
-        x
+   z    x
 
 w/x : increase/decrease linear velocity (Burger : ~ 0.22, Waffle and Waffle Pi : ~ 0.26)
 a/d : increase/decrease angular velocity (Burger : ~ 2.84, Waffle and Waffle Pi : ~ 1.82)
+z   : stop turn
 
 space key, s : force stop
 
@@ -148,6 +149,11 @@ if __name__=="__main__":
                 target_angular_vel  = 0.0
                 control_angular_vel = 0.0
                 print(vels(target_linear_vel, target_angular_vel))
+            elif key == 'z' :
+                target_angular_vel = 0
+                status = status + 1
+                print(vels(target_linear_vel,target_angular_vel))
+
             else:
                 if (key == '\x03'):
                     break

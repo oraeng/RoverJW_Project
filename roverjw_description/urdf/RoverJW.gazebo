@@ -66,13 +66,13 @@
       <torque>${wheel_torque}</torque>
       <commandTopic>RoverJW/cmd_vel</commandTopic>
       <odometryTopic>RoverJW/odom</odometryTopic>
-      <odometryFrame>odom</odometryFrame>
-      <publishWheelTF>true</publishWheelTF>
+      <!-- <odometryFrame>odom</odometryFrame> -->
+      <!-- <publishWheelTF>true</publishWheelTF> -->
       <publishOdomTF>true</publishOdomTF>
       <covariance_x>0.0001</covariance_x>
       <covariance_y>0.0001</covariance_y>
       <covariance_yaw>0.01</covariance_yaw>
-      <broadcastTF>1</broadcastTF>
+      <!-- <broadcastTF>1</broadcastTF> -->
     </plugin>
 </gazebo>
 
